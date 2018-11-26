@@ -4,6 +4,12 @@ document.addEventListener('DOMContentLoaded', function () {
         button = document.getElementsByTagName("button"),
         open = document.querySelector(".open"),
         shop = document.querySelector(".shop");
+
+        for (let i=0; i<button.length; i++) {
+            button[i].classList.add('buyButton');
+        }
+
+        let buttons = document.querySelectorAll('.buyButton');
     //создание объектов для корзины
     function creatModal() {
         let cart = document.createElement("div"),
@@ -30,44 +36,21 @@ document.addEventListener('DOMContentLoaded', function () {
     let cart = document.querySelector(".cart"),
         field = document.querySelector(".cart-field"),
         close = document.querySelector(".close");
+
     
-        console.log(button);
-    
-    for (let i=0; i<button.length; i++) {
-        button[i].addEventListener("click", function (){
-            let item = product[i].cloneNode(true),
-                btn = item.querySelector("button");
-            
-            btn.classList.add("delete-btn");
-            item.classList.add("product-bouth");
-            btn.textContent = "Удалить";
-            field.appendChild(item);
-            product[i].remove();
-    
+    for (let i=0; i<buttons.length; i++) {
+        buttons[i].addEventListener("click", function (){
+            if (buttons[i].textContent == 'Купить!') {
+            buttons[i].textContent = 'Убрать';
+            field.appendChild(product[i]);
+            }else {
+                buttons[i].textContent = 'Купить!';
+                shop.appendChild(product[i]);
+            }
         });
     }
     
-    open.addEventListener("click", function () {
-       
-            let bouthProduct = field.querySelectorAll(".product");
-                removeBtn = field.querySelectorAll(".delete-btn");
-    
-    
-            for (let j=0; j<removeBtn.length; j++) {
-                removeBtn[j].addEventListener("click", function() {
-                    let item = bouthProduct[j].cloneNode(true),
-                        removeBtn = item.querySelector(".delete-btn");
-    
-                        removeBtn.classList.add("dj");
-                        removeBtn.textContent = "Купить";
-                        shop.appendChild(item);
-                        bouthProduct[j].remove();
-                });
-            }
-        
-    
-       
-    });
+
     
     
     
